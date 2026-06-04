@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services - Fiza Events</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    body { 
+      animation: fadeIn 0.25s ease-in;
+      font-family: 'Inter', system-ui, sans-serif; 
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-gradient { background: linear-gradient(135deg, #0A2540 0%, #0F5A6B 70%, #2A9D8F 100%); }
+    .premium-card { 
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+    }
+    .premium-card:hover { 
+      transform: translateY(-12px); 
+      box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    }
+    .service-icon {
+      transition: all 0.4s ease;
+    }
+    .premium-card:hover .service-icon {
+      transform: scale(1.15) rotate(8deg);
+      color: #4ECDC4;
+    }
+  </style>
+</head>
+<body class="bg-slate-50">
+
+  <!-- Navbar -->
+  <nav class="bg-[#0A2540]/95 backdrop-blur-md shadow-xl sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <h1 class="text-3xl font-bold text-white tracking-tighter">
+        Fiza<span class="text-[#4ECDC4]">Events</span>
+      </h1>
+      <div class="space-x-9 text-white/90 text-lg">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="About.html" class="nav-link">About</a>
+        <a href="service.html" class="nav-link text-[#4ECDC4]">Services</a>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero-gradient text-white py-28">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="text-5xl md:text-6xl font-bold mb-6">Our Services</h2>
+      <p class="text-xl text-white/80 max-w-2xl mx-auto">
+        Complete event support and resource solutions for professional business events in Mauritius
+      </p>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <div class="premium-card bg-white border border-gray-100 rounded-3xl p-10">
+          <i class="fa-solid fa-calendar-days service-icon text-5xl text-gray-400 mb-6"></i>
+          <h3 class="text-2xl font-semibold text-[#0A2540] mb-4">Event Management</h3>
+          <p class="text-gray-600">End-to-end planning, coordination, and execution of corporate events and conferences.</p>
+        </div>
+
+        <div class="premium-card bg-white border border-gray-100 rounded-3xl p-10">
+          <i class="fa-solid fa-microphone service-icon text-5xl text-gray-400 mb-6"></i>
+          <h3 class="text-2xl font-semibold text-[#0A2540] mb-4">Conference Production</h3>
+          <p class="text-gray-600">High-quality production of professional conferences, forums, and executive roundtables.</p>
+        </div>
+
+        <div class="premium-card bg-white border border-gray-100 rounded-3xl p-10">
+          <i class="fa-solid fa-handshake service-icon text-5xl text-gray-400 mb-6"></i>
+          <h3 class="text-2xl font-semibold text-[#0A2540] mb-4">Sponsorship Management</h3>
+          <p class="text-gray-600">Securing premium sponsors and building valuable strategic partnerships.</p>
+        </div>
+
+        <div class="premium-card bg-white border border-gray-100 rounded-3xl p-10">
+          <i class="fa-solid fa-users service-icon text-5xl text-gray-400 mb-6"></i>
+          <h3 class="text-2xl font-semibold text-[#0A2540] mb-4">Delegate Acquisition</h3>
+          <p class="text-gray-600">Targeted outreach and marketing to attract high-profile delegates and decision-makers.</p>
+        </div>
+
+        <div class="premium-card bg-white border border-gray-100 rounded-3xl p-10">
+          <i class="fa-solid fa-bullhorn service-icon text-5xl text-gray-400 mb-6"></i>
+          <h3 class="text-2xl font-semibold text-[#0A2540] mb-4">Marketing & Promotion</h3>
+          <p class="text-gray-600">Strategic branding, digital marketing, and pre-event promotion campaigns.</p>
+        </div>
+
+        <div class="premium-card bg-white border border-gray-100 rounded-3xl p-10">
+          <i class="fa-solid fa-users-gear service-icon text-5xl text-gray-400 mb-6"></i>
+          <h3 class="text-2xl font-semibold text-[#0A2540] mb-4">Event Staffing & Operations</h3>
+          <p class="text-gray-600">Providing experienced staff, on-site management, logistics, and full operational support.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Additional Support -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h3 class="text-3xl font-bold text-[#0A2540] mb-8">Additional Resources We Provide</h3>
+      <div class="flex flex-wrap justify-center gap-4 text-gray-600">
+        <span class="bg-white px-5 py-3 rounded-2xl shadow-sm">Speaker Management</span>
+        <span class="bg-white px-5 py-3 rounded-2xl shadow-sm">Logistics & Venue Coordination</span>
+        <span class="bg-white px-5 py-3 rounded-2xl shadow-sm">Technical Support</span>
+        <span class="bg-white px-5 py-3 rounded-2xl shadow-sm">Event Registration Systems</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-20 bg-[#0A2540] text-white text-center">
+    <div class="max-w-4xl mx-auto px-6">
+      <h3 class="text-4xl font-bold mb-6">Ready to Execute Your Next Event?</h3>
+      <p class="text-xl text-white/80 mb-10">From staffing to full conference production — we provide everything you need to succeed in Mauritius.</p>
+      <a href="contact.html" 
+         class="inline-block bg-[#4ECDC4] text-[#0A2540] px-12 py-5 rounded-2xl font-semibold text-xl hover:scale-105 transition-all">
+        Get In Touch
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#0A2540] text-white/70 py-12">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <p>&copy; 2026 Fiza Events • Premium Event Solutions in Mauritius</p>
+    </div>
+  </footer>
+
+</body>
+</html>

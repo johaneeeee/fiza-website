@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fiza Events | Premium Event Support in Mauritius</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <style>
+    body { 
+      animation: fadeIn 0.25s ease-in; 
+      font-family: 'Inter', system-ui, sans-serif;
+     }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-gradient {background: linear-gradient(135deg, #0A2540 0%, #0F5A6B 70%, #2A9D8F 100%);}
+
+    .premium-card {
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .premium-card:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    }
+
+    .service-icon {
+      transition: all 0.4s ease;
+    }
+
+    .premium-card:hover .service-icon {
+      transform: scale(1.15) rotate(8deg);
+      color: #4ECDC4;
+    }
+
+    .cta-button {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(90deg, #4ECDC4, #45B8AC);
+    }
+
+    .cta-button:hover {
+      background: linear-gradient(90deg, #45B8AC, #3CA89C);
+      transform: scale(1.05);
+    }
+
+    .cta-button:after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.4), rgba(255,255,255,0));
+      transform: skewX(-25deg);
+      animation: shimmer 4s infinite;
+    }
+
+    @keyframes shimmer {
+      100% { transform: translateX(400%); }
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50">
+
+  <!-- Navbar -->
+  <nav class="bg-[#0A2540]/95 backdrop-blur-md shadow-xl sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+      <h1 class="text-3xl font-bold text-white tracking-tighter">
+        Fiza<span class="text-[#4ECDC4]">Events</span>
+      </h1>
+
+      <div class="space-x-9 text-white/90 text-lg">
+        <a href="index.html" class="text-[#4ECDC4]">Home</a>
+        <a href="About.html">About</a>
+        <a href="service.html">Services</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-gradient text-white py-32 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+      <h2 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+        Exceptional Events.<br>Extraordinary Mauritius.
+      </h2>
+      <p class="text-xl md:text-2xl text-white/80 mb-10 max-w-3xl mx-auto">
+        Premium event management and investment summit specialists in Mauritius.
+      </p>
+      <button class="cta-button text-[#0A2540] px-12 py-5 rounded-2xl font-semibold text-xl shadow-2xl">
+        Begin Your Journey
+      </button>
+    </div>
+  </section>
+
+  <!-- EXPERTISE (MOVED UP - MAIN VALUE SECTION) -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <h3 class="text-4xl font-bold text-center mb-16 text-[#0A2540]">Our Expertise</h3>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <div class="premium-card p-10 border border-gray-100 rounded-3xl">
+          <i class="fa-solid fa-calendar-days service-icon text-5xl text-gray-400 mb-6"></i>
+          <h4 class="font-semibold text-2xl">Event Management</h4>
+          <p class="text-gray-600 mt-4">Seamless execution from concept to delivery.</p>
+        </div>
+
+        <div class="premium-card p-10 border border-gray-100 rounded-3xl">
+          <i class="fa-solid fa-microphone service-icon text-5xl text-gray-400 mb-6"></i>
+          <h4 class="font-semibold text-2xl">Conference Production</h4>
+          <p class="text-gray-600 mt-4">High-impact international conferences.</p>
+        </div>
+
+        <div class="premium-card p-10 border border-gray-100 rounded-3xl">
+          <i class="fa-solid fa-handshake service-icon text-5xl text-gray-400 mb-6"></i>
+          <h4 class="font-semibold text-2xl">Sponsorship Management</h4>
+          <p class="text-gray-600 mt-4">Attracting premium sponsors and partners.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY MAURITIUS (MOVED AFTER EXPERTISE) -->
+  <section class="py-20 bg-gradient-to-br from-[#0A2540] via-[#0F5A6B] to-[#2A9D8F] text-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <h3 class="text-4xl font-bold text-center mb-16">Why Mauritius?</h3>
+
+      <div class="grid md:grid-cols-3 gap-10">
+
+        <div class="premium-card text-center bg-white/10 backdrop-blur-lg rounded-3xl p-10">
+          <i class="fa-solid fa-globe service-icon text-6xl text-[#4ECDC4] mb-6"></i>
+          <h4 class="font-semibold text-2xl">Strategic Gateway</h4>
+          <p class="text-white/75 mt-4">Africa’s gateway to Asia and beyond</p>
+        </div>
+
+        <div class="premium-card text-center bg-white/10 backdrop-blur-lg rounded-3xl p-10">
+          <i class="fa-solid fa-landmark service-icon text-6xl text-[#4ECDC4] mb-6"></i>
+          <h4 class="font-semibold text-2xl">Business Excellence</h4>
+          <p class="text-white/75 mt-4">Stable, secure, and investor-friendly</p>
+        </div>
+
+        <div class="premium-card text-center bg-white/10 backdrop-blur-lg rounded-3xl p-10">
+          <i class="fa-solid fa-umbrella-beach service-icon text-6xl text-[#4ECDC4] mb-6"></i>
+          <h4 class="font-semibold text-2xl">Unforgettable Luxury</h4>
+          <p class="text-white/75 mt-4">World-class experiences for delegates</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+<section class="py-24 bg-white text-center">
+  <div class="max-w-4xl mx-auto px-6">
+
+    <h3 class="text-5xl font-bold mb-6 text-[#0A2540]">
+      Ready to Host an Unforgettable Event?
+    </h3>
+
+    <p class="text-xl text-gray-600 mb-10">
+      Let’s create something remarkable together in Mauritius.
+    </p>
+
+    <button class="cta-button text-[#0A2540] px-14 py-6 rounded-2xl font-semibold text-2xl shadow-lg">
+      Get In Touch Now
+    </button>
+
+  </div>
+</section>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#0A2540] text-white/70 py-12">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <p>&copy; 2026 Fiza Events • Premium Event Solutions in Mauritius</p>
+    </div>
+  </footer>
+
+</body>
+</html>
