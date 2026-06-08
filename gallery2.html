@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - Fiza Events</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+
+    .gallery-card {
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .gallery-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    }
+
+    .modal {
+      animation: modalFade 0.3s ease forwards;
+    }
+    
+    @keyframes modalFade {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body class="bg-slate-50">
+
+  <!-- Navbar -->
+<nav class="bg-[#0A2540]/95 backdrop-blur-md shadow-xl sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+    <h1 class="text-3xl font-bold text-white tracking-tighter">
+      Fiza<span class="text-[#4ECDC4]">Events</span>
+    </h1>
+    
+    <div class="space-x-8 text-white/90 text-lg flex items-center">
+      <a href="index.html" class="hover:text-[#4ECDC4] transition">Home</a>
+      <a href="about.html" class="hover:text-[#4ECDC4] transition">About</a>
+      <a href="service.html" class="hover:text-[#4ECDC4] transition">Services</a>
+      
+      <!-- Compact Gallery Dropdown -->
+      <div class="relative group">
+        <a href="#" 
+           class="text-[#4ECDC4] font-semibold flex items-center gap-1 hover:text-[#4ECDC4] transition">
+          Gallery
+          <i class="fas fa-chevron-down text-sm transition-transform group-hover:rotate-180"></i>
+        </a>
+        
+        <!-- Improved Dropdown -->
+        <div class="absolute hidden group-hover:block pt-3 z-[100] right-0">
+          <div class="bg-white shadow-2xl rounded-3xl py-4 px-5 w-72 text-[#0A2540] text-base">
+            <a href="gallery1.html" 
+               class="block px-4 py-3 hover:bg-gray-100 rounded-2xl transition flex items-center gap-3 text-sm">
+              Banking CEE Expo
+            </a>
+            <a href="gallery2.html" 
+               class="block px-4 py-3 hover:bg-gray-100 rounded-2xl transition flex items-center gap-3 text-sm">
+              Digital Banking CEE Summit
+            </a>
+            <a href="gallery3.html" 
+               class="block px-4 py-3 hover:bg-gray-100 rounded-2xl transition flex items-center gap-3 text-sm">
+              Insurance CEE Expo
+            </a>
+            <div class="border-t my-2"></div>
+              <a href="gallery.html" 
+                 class="block px-4 py-3 hover:bg-gray-100 rounded-2xl transition flex items-center gap-3 text-sm font-medium">
+                All Events Gallery
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+  <!-- Hero with Video Background -->
+  <section class="relative h-screen flex items-center justify-center overflow-hidden">
+    <video 
+      autoplay 
+      muted 
+      loop 
+      playsinline 
+      class="absolute inset-0 w-full h-full object-cover">
+      <source src="photos/BankingCEESummit1.mp4" type="video/mp4">
+    </video>
+    
+    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70"></div>
+    
+    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+      <h1 class="text-6xl md:text-7xl font-bold text-white mb-6 tracking-tight">
+        Digital Banking CEE Summit
+      </h1>
+      <p class="text-2xl md:text-3xl text-white/90 max-w-2xl mx-auto">
+        Showcasing the future of fintech, digital banking &amp; innovation
+      </p>
+    </div>
+
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+      <i class="fas fa-chevron-down text-4xl text-white/70"></i>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
+        <h2 class="text-4xl font-bold text-[#0A2540]">Digital Banking CEE Summit 2025</h2>
+        
+        <div class="flex gap-3">
+          <button onclick="filterGallery('all')" 
+                  class="filter-btn active px-8 py-3 rounded-2xl text-sm font-medium bg-[#0A2540] text-white">
+            All Photos
+          </button>
+          <button onclick="filterGallery('highlights')" 
+                  class="filter-btn px-8 py-3 rounded-2xl text-sm font-medium hover:bg-white border border-gray-200">
+            Summit Highlights
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6" id="gallery-grid">
+        <!-- Populated by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="hidden fixed inset-0 bg-black/90 z-[100] flex items-center justify-center">
+    <div class="modal relative max-w-5xl w-full mx-4">
+      <button onclick="closeLightbox()" 
+              class="absolute -top-4 -right-4 bg-white text-[#0A2540] w-12 h-12 rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition z-10">
+        <i class="fas fa-times text-xl"></i>
+      </button>
+      
+      <img id="lightbox-image" 
+           src="" 
+           alt="" 
+           class="w-full rounded-3xl shadow-2xl max-h-[85vh] object-contain">
+      
+      <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8 rounded-b-3xl">
+        <h3 id="lightbox-title" class="text-3xl font-bold text-white mb-2">Digital Banking CEE Summit 2025</h3>
+        <p id="lightbox-desc" class="text-white/80 text-lg"></p>
+      </div>
+      
+      <button onclick="prevImage()" 
+              class="absolute left-6 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-[#0A2540] w-14 h-14 rounded-2xl flex items-center justify-center shadow-xl transition">
+        <i class="fas fa-chevron-left text-2xl"></i>
+      </button>
+      <button onclick="nextImage()" 
+              class="absolute right-6 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-[#0A2540] w-14 h-14 rounded-2xl flex items-center justify-center shadow-xl transition">
+        <i class="fas fa-chevron-right text-2xl"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-[#0A2540] text-white/70 py-16">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <p class="text-lg">© 2026 Fiza Events • Premium Event Management in Mauritius</p>
+    </div>
+  </footer>
+
+  <script>
+    const photos = [
+      { src: "photos/BankingCEESum1.jpg", desc: "Opening Keynote", isHighlight: true },
+      { src: "photos/BankingCEESum2.jpg", desc: "Fintech Innovation Showcase", isHighlight: true },
+      { src: "photos/BankingCEESum3.jpg", desc: "Main Stage Session", isHighlight: true },
+      { src: "photos/BankingCEESum4.jpg", desc: "Panel Discussion", isHighlight: false },
+      { src: "photos/BankingCEESum5.jpg", desc: "Networking Break", isHighlight: true },
+      { src: "photos/BankingCEESum6.jpg", desc: "Exhibition Area", isHighlight: false },
+      { src: "photos/BankingCEESum7.jpg", desc: "AI in Banking Presentation", isHighlight: true },
+      { src: "photos/BankingCEESum8.jpg", desc: "Interactive Workshop", isHighlight: false },
+      { src: "photos/BankingCEESum9.jpg", desc: "Good networking", isHighlight: true },
+      { src: "photos/BankingCEESum10.jpg", desc: "Closing Gala", isHighlight: true }
+    ];
+
+    let currentIndex = 0;
+
+    function createGallery(filteredPhotos) {
+      const grid = document.getElementById('gallery-grid');
+      grid.innerHTML = '';
+
+      filteredPhotos.forEach((photo, index) => {
+        const div = document.createElement('div');
+        div.className = `gallery-card group relative rounded-3xl overflow-hidden shadow-md cursor-pointer aspect-[4/3]`;
+        div.innerHTML = `
+          <img src="${photo.src}" 
+               alt="Digital Banking CEE Summit 2025" 
+               loading="lazy"
+               class="w-full h-full object-cover transition-all duration-500 group-hover:scale-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent opacity-0 group-hover:opacity-100 transition-all flex items-end p-6">
+            <p class="text-white text-sm">${photo.desc}</p>
+          </div>
+        `;
+        div.onclick = () => openLightbox(index);
+        grid.appendChild(div);
+      });
+    }
+
+    function filterGallery(type) {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        const isActive = (type === 'all' && btn.textContent.includes('All')) || 
+                        (type === 'highlights' && btn.textContent.includes('Highlights'));
+        
+        btn.classList.toggle('active', isActive);
+        btn.classList.toggle('bg-[#0A2540]', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('border', !isActive);
+        btn.classList.toggle('border-gray-200', !isActive);
+      });
+
+      const filtered = type === 'all' 
+        ? photos 
+        : photos.filter(photo => photo.isHighlight);
+      
+      createGallery(filtered);
+    }
+
+    function openLightbox(index) {
+      currentIndex = index;
+      const photo = photos[index];
+      document.getElementById('lightbox-image').src = photo.src;
+      document.getElementById('lightbox-desc').textContent = photo.desc;
+      document.getElementById('lightbox').classList.remove('hidden');
+      document.getElementById('lightbox').classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+      document.body.style.overflow = 'visible';
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + photos.length) % photos.length;
+      openLightbox(currentIndex);
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % photos.length;
+      openLightbox(currentIndex);
+    }
+
+    // Keyboard support
+    document.addEventListener('keydown', (e) => {
+      if (document.getElementById('lightbox').classList.contains('hidden')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextImage();
+    });
+
+    document.getElementById('lightbox').addEventListener('click', (e) => {
+      if (e.target.id === 'lightbox') closeLightbox();
+    });
+
+    // Initialize
+    createGallery(photos);
+  </script>
+</body>
+</html>
