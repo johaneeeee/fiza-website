@@ -6,178 +6,350 @@
   <title>Fiza Events | Premium Event Support in Mauritius</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
   <style>
     body { 
-      animation: fadeIn 0.25s ease-in; 
-      font-family: 'Inter', system-ui, sans-serif;
-     }
+      font-family: 'Inter', system-ui, sans-serif; 
+    }
 
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-    .hero-gradient {background: linear-gradient(135deg, #0A2540 0%, #0F5A6B 70%, #2A9D8F 100%);}
+    .hero-gradient {
+      background: linear-gradient(135deg, #0A2540 0%, #0F5A6B 70%, #2A9D8F 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 25% 30%, rgba(78, 205, 196, 0.22) 0%, transparent 50%),
+        radial-gradient(circle at 75% 65%, rgba(78, 205, 196, 0.18) 0%, transparent 55%);
+      animation: heroBackground 28s ease infinite;
+    }
+
+    @keyframes heroBackground {
+      0%   { transform: scale(1) rotate(0deg); }
+      50%  { transform: scale(1.12) rotate(2deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(60px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fade-up {
+      animation: fadeUp 0.9s ease forwards;
+    }
 
     .premium-card {
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
+    
     .premium-card:hover {
-      transform: translateY(-15px) scale(1.02);
-      box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+      transform: translateY(-18px) scale(1.03);
+      box-shadow: 0 30px 60px -15px rgb(0 0 0 / 0.25);
     }
 
-    .service-icon {
-      transition: all 0.4s ease;
-    }
-
-    .premium-card:hover .service-icon {
-      transform: scale(1.15) rotate(8deg);
-      color: #4ECDC4;
-    }
-
+    /* Button Animations */
     .cta-button {
       position: relative;
       overflow: hidden;
       background: linear-gradient(90deg, #4ECDC4, #45B8AC);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
+    
     .cta-button:hover {
-      background: linear-gradient(90deg, #45B8AC, #3CA89C);
-      transform: scale(1.05);
+      transform: scale(1.08) translateY(-3px);
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.2), 0 8px 10px -6px rgb(0 0 0 / 0.2);
     }
 
-    .cta-button:after {
+    .cta-button::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
+      top: 0;
+      left: -100%;
       width: 40%;
-      height: 200%;
-      background: linear-gradient(120deg, rgba(255,255,255,0.4), rgba(255,255,255,0));
-      transform: skewX(-25deg);
-      animation: shimmer 4s infinite;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+      transition: 0.7s;
+    }
+    
+    .cta-button:hover::before {
+      left: 200%;
     }
 
-    @keyframes shimmer {
-      100% { transform: translateX(400%); }
+    .section-animate {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.9s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    
+    .section-animate.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .video-container video {
+      transition: transform 0.9s ease;
+    }
+    
+    .video-container:hover video {
+      transform: scale(1.06);
+    }
+
+    .mute-btn {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      transition: all .3s ease;
+    }
+
+    .mute-btn:hover {
+      transform: scale(1.15);
+      text-shadow: 0 0 15px rgba(255,255,255,.8);
     }
   </style>
 </head>
-
 <body class="bg-slate-50">
 
   <!-- Navbar -->
-  <nav class="bg-[#0A2540]/95 backdrop-blur-md shadow-xl sticky top-0 z-50">
+  <nav id="navbar" class="bg-[#0A2540]/95 backdrop-blur-md shadow-xl sticky top-0 z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
       <h1 class="text-3xl font-bold text-white tracking-tighter">
         Fiza<span class="text-[#4ECDC4]">Events</span>
       </h1>
-
-      <div class="space-x-9 text-white/90 text-lg">
+      
+      <div class="space-x-9 text-white/90 text-lg flex items-center">
         <a href="index.html" class="text-[#4ECDC4]">Home</a>
-        <a href="About.html">About</a>
-        <a href="service.html">Services</a>
+        <a href="about.html" class="hover:text-[#4ECDC4] transition">About</a>
+        <a href="service.html" class="hover:text-[#4ECDC4] transition">Services</a>
+        
+        <!-- Gallery Dropdown -->
+        <div class="relative group">
+          <a href="#" class="font-semibold flex items-center gap-1 hover:text-[#4ECDC4] transition">
+            Gallery
+            <i class="fas fa-chevron-down text-sm transition-transform group-hover:rotate-180"></i>
+          </a>
+          
+          <div class="absolute hidden group-hover:block pt-3 z-[100] right-0">
+            <div class="bg-white shadow-2xl rounded-3xl py-4 px-5 w-72 text-[#0A2540] text-base">
+              <a href="gallery1.html" class="block px-4 py-3 hover:bg-gray-100 rounded-2xl transition flex items-center gap-3 text-sm">
+                Banking CEE Expo
+              </a>
+              <a href="gallery2.html" class="block px-4 py-3 hover:bg-gray-100 rounded-2xl transition flex items-center gap-3 text-sm">
+                Digital Banking CEE Summit
+              </a>
+              <a href="gallery3.html" class="block px-4 py-3 hover:bg-gray-100 rounded-2xl transition flex items-center gap-3 text-sm">
+                Insurance CEE Expo
+              </a>
+              <div class="border-t my-2"></div>
+              <a href="gallery.html" class="block px-4 py-3 hover:bg-gray-100 rounded-2xl transition flex items-center gap-3 text-sm font-medium">
+                All Events Gallery
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section class="hero-gradient text-white py-32 relative overflow-hidden">
+  <section class="hero-gradient text-white py-32 relative overflow-hidden min-h-screen flex items-center">
+    <div class="hero-bg"></div>
+    
     <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
-      <h2 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+      <h2 class="text-5xl md:text-7xl font-bold mb-6 leading-tight animate-fade-up">
         Exceptional Events.<br>Extraordinary Mauritius.
       </h2>
-      <p class="text-xl md:text-2xl text-white/80 mb-10 max-w-3xl mx-auto">
-        Premium event management and investment summit specialists in Mauritius.
+      <p class="text-xl md:text-2xl text-white/80 mb-10 max-w-3xl mx-auto animate-fade-up" style="animation-delay: 300ms">
+        Premium event support and resource partner in Mauritius.
       </p>
-      <button class="cta-button text-[#0A2540] px-12 py-5 rounded-2xl font-semibold text-xl shadow-2xl">
+      <button onclick="document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })" 
+              class="cta-button text-[#0A2540] px-12 py-5 rounded-2xl font-semibold text-xl shadow-2xl animate-fade-up" style="animation-delay: 600ms">
         Begin Your Journey
       </button>
     </div>
   </section>
 
-  <!-- EXPERTISE (MOVED UP - MAIN VALUE SECTION) -->
-  <section class="py-20 bg-white">
+  <!-- OUR EXPERTISE -->
+  <section class="py-20 bg-white section-animate" id="expertise">
     <div class="max-w-7xl mx-auto px-6">
-      <h3 class="text-4xl font-bold text-center mb-16 text-[#0A2540]">Our Expertise</h3>
-
+      <h3 class="text-4xl font-bold text-center mb-16 text-[#0A2540] animate-fade-up">Our Expertise</h3>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-        <div class="premium-card p-10 border border-gray-100 rounded-3xl">
+        <div class="premium-card p-10 border border-gray-100 rounded-3xl section-animate" style="animation-delay: 100ms">
           <i class="fa-solid fa-calendar-days service-icon text-5xl text-gray-400 mb-6"></i>
           <h4 class="font-semibold text-2xl">Event Management</h4>
-          <p class="text-gray-600 mt-4">Seamless execution from concept to delivery.</p>
+          <p class="text-gray-600 mt-4">End-to-end planning and execution.</p>
         </div>
-
-        <div class="premium-card p-10 border border-gray-100 rounded-3xl">
+        <div class="premium-card p-10 border border-gray-100 rounded-3xl section-animate" style="animation-delay: 200ms">
           <i class="fa-solid fa-microphone service-icon text-5xl text-gray-400 mb-6"></i>
           <h4 class="font-semibold text-2xl">Conference Production</h4>
-          <p class="text-gray-600 mt-4">High-impact international conferences.</p>
+          <p class="text-gray-600 mt-4">High-impact professional conferences.</p>
         </div>
-
-        <div class="premium-card p-10 border border-gray-100 rounded-3xl">
+        <div class="premium-card p-10 border border-gray-100 rounded-3xl section-animate" style="animation-delay: 300ms">
           <i class="fa-solid fa-handshake service-icon text-5xl text-gray-400 mb-6"></i>
           <h4 class="font-semibold text-2xl">Sponsorship Management</h4>
-          <p class="text-gray-600 mt-4">Attracting premium sponsors and partners.</p>
+          <p class="text-gray-600 mt-4">Premium sponsorship acquisition.</p>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- WHY MAURITIUS (MOVED AFTER EXPERTISE) -->
-  <section class="py-20 bg-gradient-to-br from-[#0A2540] via-[#0F5A6B] to-[#2A9D8F] text-white">
+  <!-- LATEST EVENTS CONDUCTED -->
+  <section class="py-16 bg-gray-50 section-animate" id="events">
     <div class="max-w-7xl mx-auto px-6">
-      <h3 class="text-4xl font-bold text-center mb-16">Why Mauritius?</h3>
+      <div class="text-center mb-10">
+        <h3 class="text-5xl font-bold text-[#0A2540] tracking-tight mb-6 animate-fade-up">Latest Events Conducted</h3>
+        <p class="text-xl text-gray-600 flex flex-wrap justify-center items-center gap-x-6 gap-y-3">
+          In collaboration with <span class="font-semibold text-[#4ECDC4]">Connectiva</span>
+          <span class="text-[#4ECDC4] font-medium">•</span>
+          <span>10+ High-Profile Events Delivered Across Europe</span>
+        </p>
+      </div>
 
+      <div class="grid md:grid-cols-3 gap-8">
+        <a href="gallery1.html" class="block premium-card bg-white rounded-3xl overflow-hidden group cursor-pointer video-container section-animate" style="animation-delay: 100ms">
+          <div class="p-6 pb-4">
+            <h4 class="font-semibold text-xl">INSURANCE CEE EXPO</h4>
+            <p class="text-gray-500 text-sm mt-1">Major Insurance Exhibition • 2025</p>
+          </div>
+          <div class="overflow-hidden h-64 relative">
+            <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+              <source src="photos/InsuranceCEEExpo.mp4" type="video/mp4">
+            </video>
+            <button type="button" onclick="toggleMute(event, this)" class="mute-btn absolute bottom-4 right-4">
+              <i class="fa-solid fa-volume-xmark"></i>
+            </button>
+          </div>
+        </a>
+
+        <a href="gallery2.html" class="block premium-card bg-white rounded-3xl overflow-hidden group cursor-pointer video-container section-animate" style="animation-delay: 200ms">
+          <div class="p-6 pb-4">
+            <h4 class="font-semibold text-xl">DIGITAL BANKING CEE SUMMIT</h4>
+            <p class="text-gray-500 text-sm mt-1">Fintech & Digital Banking Summit • 2025</p>
+          </div>
+          <div class="overflow-hidden h-64 relative">
+            <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+              <source src="photos/BankingCEESummit.mp4" type="video/mp4">
+            </video>
+            <button type="button" onclick="toggleMute(event, this)" class="mute-btn absolute bottom-4 right-4">
+              <i class="fa-solid fa-volume-xmark"></i>
+            </button>
+          </div>
+        </a>
+
+        <a href="gallery3.html" class="block premium-card bg-white rounded-3xl overflow-hidden group cursor-pointer video-container section-animate" style="animation-delay: 300ms">
+          <div class="p-6 pb-4">
+            <h4 class="font-semibold text-xl">BANKING CEE EXPO</h4>
+            <p class="text-gray-500 text-sm mt-1">Banking & Financial Services Expo • 2025</p>
+          </div>
+          <div class="overflow-hidden h-64 relative">
+            <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+              <source src="photos/BankingCEEExpo.mp4" type="video/mp4">
+            </video>
+            <button type="button" onclick="toggleMute(event, this)" class="mute-btn absolute bottom-4 right-4">
+              <i class="fa-solid fa-volume-xmark"></i>
+            </button>
+          </div>
+        </a>
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="gallery.html" 
+           class="inline-flex items-center gap-3 text-[#0A2540] hover:text-[#4ECDC4] transition-colors duration-300 font-medium">
+          <span class="font-medium">Explore Full Gallery</span>
+          <span class="text-2xl leading-none">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY MAURITIUS -->
+  <section class="py-20 bg-gradient-to-br from-[#0A2540] via-[#0F5A6B] to-[#2A9D8F] text-white section-animate">
+    <div class="max-w-7xl mx-auto px-6">
+      <h3 class="text-4xl font-bold text-center mb-16 animate-fade-up">Why Mauritius?</h3>
       <div class="grid md:grid-cols-3 gap-10">
-
-        <div class="premium-card text-center bg-white/10 backdrop-blur-lg rounded-3xl p-10">
-          <i class="fa-solid fa-globe service-icon text-6xl text-[#4ECDC4] mb-6"></i>
-          <h4 class="font-semibold text-2xl">Strategic Gateway</h4>
-          <p class="text-white/75 mt-4">Africa’s gateway to Asia and beyond</p>
+        <div class="premium-card text-center bg-white/10 backdrop-blur-lg rounded-3xl p-10 section-animate" style="animation-delay: 100ms">
+          <i class="fa-solid fa-users service-icon text-6xl text-[#4ECDC4] mb-6"></i>
+          <h4 class="font-semibold text-2xl">Talent Pool</h4>
+          <p class="text-white/75 mt-4">Access to a skilled, multilingual, and professional talent pool</p>
         </div>
-
-        <div class="premium-card text-center bg-white/10 backdrop-blur-lg rounded-3xl p-10">
-          <i class="fa-solid fa-landmark service-icon text-6xl text-[#4ECDC4] mb-6"></i>
-          <h4 class="font-semibold text-2xl">Business Excellence</h4>
-          <p class="text-white/75 mt-4">Stable, secure, and investor-friendly</p>
+        <div class="premium-card text-center bg-white/10 backdrop-blur-lg rounded-3xl p-10 section-animate" style="animation-delay: 200ms">
+          <i class="fa-solid fa-scale-balanced service-icon text-6xl text-[#4ECDC4] mb-6"></i>
+          <h4 class="font-semibold text-2xl">Favorable Regulations</h4>
+          <p class="text-white/75 mt-4">Stable, transparent, and business-friendly regulatory environment</p>
         </div>
-
-        <div class="premium-card text-center bg-white/10 backdrop-blur-lg rounded-3xl p-10">
-          <i class="fa-solid fa-umbrella-beach service-icon text-6xl text-[#4ECDC4] mb-6"></i>
-          <h4 class="font-semibold text-2xl">Unforgettable Luxury</h4>
-          <p class="text-white/75 mt-4">World-class experiences for delegates</p>
+        <div class="premium-card text-center bg-white/10 backdrop-blur-lg rounded-3xl p-10 section-animate" style="animation-delay: 300ms">
+          <i class="fa-solid fa-sack-dollar service-icon text-6xl text-[#4ECDC4] mb-6"></i>
+          <h4 class="font-semibold text-2xl">Cost Efficiency</h4>
+          <p class="text-white/75 mt-4">Highly competitive operational costs with excellent value for money</p>
         </div>
-
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-<section class="py-24 bg-white text-center">
-  <div class="max-w-4xl mx-auto px-6">
+  <section id="contact" class="py-24 bg-white text-center section-animate">
+    <div class="max-w-4xl mx-auto px-6">
+      <h3 class="text-5xl font-bold mb-6 text-[#0A2540] animate-fade-up">Ready to Host an Unforgettable Event?</h3>
+      <p class="text-xl text-gray-600 mb-10 animate-fade-up" style="animation-delay: 150ms">Let’s create something remarkable together in Mauritius.</p>
+      <button onclick="document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })" 
+              class="cta-button text-[#0A2540] px-14 py-6 rounded-2xl font-semibold text-2xl shadow-lg animate-fade-up" style="animation-delay: 300ms">
+        Get In Touch Now
+      </button>
+    </div>
+  </section>
 
-    <h3 class="text-5xl font-bold mb-6 text-[#0A2540]">
-      Ready to Host an Unforgettable Event?
-    </h3>
-
-    <p class="text-xl text-gray-600 mb-10">
-      Let’s create something remarkable together in Mauritius.
-    </p>
-
-    <button class="cta-button text-[#0A2540] px-14 py-6 rounded-2xl font-semibold text-2xl shadow-lg">
-      Get In Touch Now
-    </button>
-
-  </div>
-</section>
-
-  <!-- FOOTER -->
+  <!-- Footer -->
   <footer class="bg-[#0A2540] text-white/70 py-12">
     <div class="max-w-7xl mx-auto px-6 text-center">
       <p>&copy; 2026 Fiza Events • Premium Event Solutions in Mauritius</p>
     </div>
   </footer>
 
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 80) {
+        navbar.classList.add('py-3', 'shadow-2xl');
+      } else {
+        navbar.classList.remove('py-3', 'shadow-2xl');
+      }
+    });
+
+    // Scroll Reveal Animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    document.querySelectorAll('.section-animate').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Mute function
+    function toggleMute(event, btn) {
+      event.preventDefault();
+      event.stopPropagation();
+      const video = btn.parentElement.querySelector('video');
+      const icon = btn.querySelector('i');
+      video.muted = !video.muted;
+
+      if (video.muted) {
+        icon.classList.remove('fa-volume-high');
+        icon.classList.add('fa-volume-xmark');
+      } else {
+        icon.classList.remove('fa-volume-xmark');
+        icon.classList.add('fa-volume-high');
+      }
+    }
+  </script>
 </body>
 </html>
