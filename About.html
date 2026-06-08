@@ -11,10 +11,44 @@
       animation: fadeIn 0.25s ease-in; 
       font-family: 'Inter', system-ui, sans-serif; 
     }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-    .hero-gradient { background: linear-gradient(135deg, #0A2540 0%, #0F5A6B 70%, #2A9D8F 100%); }
-    .premium-card { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-    .premium-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); }
+    @keyframes fadeIn { 
+      from { opacity: 0; transform: translateY(5px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
+    
+    .hero-gradient { 
+      background: linear-gradient(135deg, #0A2540 0%, #0F5A6B 70%, #2A9D8F 100%); 
+    }
+    
+    .premium-card { 
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+    }
+    
+    .premium-card:hover { 
+      transform: translateY(-10px); 
+      box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); 
+    }
+
+    .nav-link {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: #4ECDC4;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover:after,
+    .nav-link.active:after {
+      width: 100%;
+    }
   </style>
 </head>
 <body class="bg-slate-50">
@@ -25,10 +59,44 @@
       <h1 class="text-3xl font-bold text-white tracking-tighter">
         Fiza<span class="text-[#4ECDC4]">Events</span>
       </h1>
-      <div class="space-x-9 text-white/90 text-lg">
+      
+      <div class="space-x-9 text-white/90 text-lg flex items-center">
         <a href="index.html" class="nav-link">Home</a>
-        <a href="About.html" class="nav-link text-[#4ECDC4]">About</a>
+        <a href="about.html" class="nav-link text-[#4ECDC4]">About</a>
         <a href="service.html" class="nav-link">Services</a>
+        
+        <!-- Gallery Dropdown -->
+        <div class="relative group">
+          <a href="#" 
+             class="nav-link font-semibold flex items-center gap-1 hover:text-[#4ECDC4] transition">
+            Gallery
+            <i class="fas fa-chevron-down text-sm transition-transform group-hover:rotate-180"></i>
+          </a>
+          
+          <!-- Dropdown Menu -->
+          <div class="absolute hidden group-hover:block pt-3 z-[100] right-0">
+            <div class="bg-white shadow-2xl rounded-3xl py-4 px-5 w-72 text-[#0A2540] text-base">
+              <a href="gallery1.html" 
+                 class="block px-4 py-3 hover:bg-gray-100 rounded-2xl transition flex items-center gap-3 text-sm">
+                Banking CEE Expo
+              </a>
+              <a href="gallery2.html" 
+                 class="block px-4 py-3 hover:bg-gray-100 rounded-2xl transition flex items-center gap-3 text-sm">
+                Digital Banking CEE Summit
+              </a>
+              <a href="gallery3.html" 
+                 class="block px-4 py-3 hover:bg-gray-100 rounded-2xl transition flex items-center gap-3 text-sm">
+                Insurance CEE Expo
+              </a>
+              <div class="border-t my-2"></div>
+              <a href="gallery.html" 
+                 class="block px-4 py-3 hover:bg-gray-100 rounded-2xl transition flex items-center gap-3 text-sm font-medium">
+                All Events Gallery
+              </a>
+            </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
@@ -72,7 +140,7 @@
     </div>
   </section>
 
-  <!-- Mission -->
+  <!-- Mission & Vision -->
   <section class="py-20 bg-[#0A2540] text-white">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
