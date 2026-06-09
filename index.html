@@ -215,7 +215,10 @@
             <p class="text-gray-500 text-sm mt-1">Major Insurance Exhibition • 2025</p>
           </div>
           <div class="overflow-hidden h-64 relative">
-            <video class="w-full h-full object-cover" autoplay muted loop playsinline>
+            <video 
+              preload="none" 
+              class="w-full h-full object-cover" 
+              autoplay muted loop playsinline>
               <source src="InsuranceCEEExpo.mp4" type="video/mp4">
             </video>
             <button type="button" onclick="toggleMute(event, this)" class="mute-btn absolute bottom-4 right-4">
