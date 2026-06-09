@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
     body { font-family: 'Inter', system-ui, sans-serif; }
-
     .gallery-card {
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -16,11 +15,15 @@
       transform: translateY(-12px);
       box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
     }
+    .category-title {
+      grid-column: 1 / -1;
+      margin: 2.5rem 0 1.5rem 0;
+    }
   </style>
 </head>
 <body class="bg-slate-50">
 
-  <!-- Navbar with Dropdown -->
+  <!-- Navbar -->
   <nav class="bg-[#0A2540]/95 backdrop-blur-md shadow-xl sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
       <h1 class="text-3xl font-bold text-white tracking-tighter">
@@ -29,36 +32,20 @@
       
       <div class="space-x-9 text-white/90 text-lg flex items-center">
         <a href="index.html" class="hover:text-[#4ECDC4] transition">Home</a>
-        <a href="About.html" class="hover:text-[#4ECDC4] transition">About</a>
+        <a href="about.html" class="hover:text-[#4ECDC4] transition">About</a>
         <a href="service.html" class="hover:text-[#4ECDC4] transition">Services</a>
         
-        <!-- Gallery Dropdown -->
         <div class="relative group">
-          <a href="#" 
-             class="text-[#4ECDC4] font-semibold flex items-center gap-1 hover:text-[#4ECDC4] transition">
-            Gallery
-            <i class="fas fa-chevron-down text-sm transition-transform group-hover:rotate-180"></i>
+          <a href="#" class="text-[#4ECDC4] font-semibold flex items-center gap-1 hover:text-[#4ECDC4] transition">
+            Gallery <i class="fas fa-chevron-down text-sm transition-transform group-hover:rotate-180"></i>
           </a>
-          
           <div class="absolute hidden group-hover:block pt-3 z-[100] right-0">
-            <div class="bg-white shadow-2xl rounded-3xl py-4 px-5 w-72 text-[#0A2540] text-base">
-              <a href="gallery1.html" 
-                 class="block px-4 py-3 hover:bg-gray-100 rounded-2xl transition flex items-center gap-3 text-sm">
-                Banking CEE Expo
-              </a>
-              <a href="gallery2.html" 
-                 class="block px-4 py-3 hover:bg-gray-100 rounded-2xl transition flex items-center gap-3 text-sm">
-                Digital Banking CEE Summit
-              </a>
-              <a href="gallery3.html" 
-                 class="block px-4 py-3 hover:bg-gray-100 rounded-2xl transition flex items-center gap-3 text-sm">
-                Insurance CEE Expo
-              </a>
+            <div class="bg-white shadow-2xl rounded-3xl py-4 px-5 w-72 text-[#0A2540]">
+              <a href="gallery1.html" class="block px-4 py-3 hover:bg-gray-100 rounded-2xl">Banking CEE Expo</a>
+              <a href="gallery2.html" class="block px-4 py-3 hover:bg-gray-100 rounded-2xl">Digital Banking CEE Summit</a>
+              <a href="gallery3.html" class="block px-4 py-3 hover:bg-gray-100 rounded-2xl">Insurance CEE Expo</a>
               <div class="border-t my-2"></div>
-              <a href="gallery.html" 
-                 class="block px-4 py-3 hover:bg-gray-100 rounded-2xl transition flex items-center gap-3 text-sm font-medium">
-                All Events Gallery
-              </a>
+              <a href="gallery.html" class="block px-4 py-3 hover:bg-gray-100 rounded-2xl font-medium">All Events Gallery</a>
             </div>
           </div>
         </div>
@@ -70,11 +57,11 @@
   <section class="bg-[#0A2540] text-white py-24">
     <div class="max-w-7xl mx-auto px-6 text-center">
       <h1 class="text-5xl md:text-6xl font-bold mb-6">All Moments</h1>
-      <p class="text-xl text-white/80">Banking • Digital Banking • Insurance Events 2025</p>
+      <p class="text-xl text-white/80">Banking • Digital Banking • Insurance Events</p>
     </div>
   </section>
 
-  <!-- Unified Gallery -->
+  <!-- Unified Gallery with Event Titles -->
   <section class="py-20 bg-gray-50">
     <div class="max-w-7xl mx-auto px-6">
       <div class="flex justify-between items-center mb-10">
@@ -82,9 +69,9 @@
         
         <div class="flex gap-3">
           <button onclick="filterCategory('all')" class="filter-btn active px-6 py-3 rounded-2xl text-sm font-medium bg-[#0A2540] text-white">All</button>
-          <button onclick="filterCategory('banking')" class="filter-btn px-6 py-3 rounded-2xl text-sm font-medium border border-gray-200 hover:bg-white">Banking Expo</button>
+          <button onclick="filterCategory('banking')" class="filter-btn px-6 py-3 rounded-2xl text-sm font-medium border border-gray-200 hover:bg-white">Banking</button>
           <button onclick="filterCategory('digital')" class="filter-btn px-6 py-3 rounded-2xl text-sm font-medium border border-gray-200 hover:bg-white">Digital Summit</button>
-          <button onclick="filterCategory('insurance')" class="filter-btn px-6 py-3 rounded-2xl text-sm font-medium border border-gray-200 hover:bg-white">Insurance Expo</button>
+          <button onclick="filterCategory('insurance')" class="filter-btn px-6 py-3 rounded-2xl text-sm font-medium border border-gray-200 hover:bg-white">Insurance</button>
         </div>
       </div>
 
@@ -93,67 +80,171 @@
   </section>
 
   <!-- Lightbox -->
-  <div id="lightbox" class="hidden fixed inset-0 bg-black/90 z-[100] flex items-center justify-center">
-    <div class="relative max-w-5xl w-full mx-4">
-      <button onclick="closeLightbox()" class="absolute -top-4 -right-4 bg-white text-[#0A2540] w-12 h-12 rounded-full flex items-center justify-center shadow-xl hover:scale-110 z-10">
-        <i class="fas fa-times text-xl"></i>
-      </button>
-      
-      <img id="lightbox-image" src="" alt="" class="w-full rounded-3xl shadow-2xl max-h-[85vh] object-contain">
-      
-      <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-8 rounded-b-3xl">
-        <h3 id="lightbox-title" class="text-3xl font-bold text-white"></h3>
-        <p id="lightbox-desc" class="text-white/80 text-lg"></p>
-      </div>
+<div id="lightbox" class="hidden fixed inset-0 bg-black/90 z-[100] flex items-center justify-center">
+  <div class="relative max-w-5xl w-full mx-4">
+    
+    <!-- Close Button -->
+    <button onclick="closeLightbox()" 
+            class="absolute -top-4 -right-4 bg-white text-[#0A2540] w-12 h-12 rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-transform z-30">
+      <i class="fas fa-times text-xl"></i>
+    </button>
+
+    <!-- Previous Button -->
+    <button onclick="prevImage()" 
+            class="absolute left-6 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl backdrop-blur-md transition-all duration-200 hover:scale-110 z-20 border border-white/20">
+      <i class="fas fa-chevron-left text-3xl"></i>
+    </button>
+
+    <!-- Next Button -->
+    <button onclick="nextImage()" 
+            class="absolute right-6 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl backdrop-blur-md transition-all duration-200 hover:scale-110 z-20 border border-white/20">
+      <i class="fas fa-chevron-right text-3xl"></i>
+    </button>
+    
+    <img id="lightbox-image" src="" alt="" 
+         class="w-full rounded-3xl shadow-2xl max-h-[85vh] object-contain">
+
+    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-8 rounded-b-3xl">
+      <h3 id="lightbox-title" class="text-3xl font-bold text-white"></h3>
+      <p id="lightbox-desc" class="text-white/80 text-lg"></p>
     </div>
   </div>
+</div>
 
   <script>
     const allPhotos = [
-      // Banking CEE Expo
-      { src: "1.jpg", title: "Banking CEE Expo 2025", desc: "Grand Opening Ceremony", category: "banking" },
-      { src: "2.jpg", title: "Banking CEE Expo 2025", desc: "Keynote Session", category: "banking" },
-      { src: "3.jpg", title: "Banking CEE Expo 2025", desc: "Exhibition Floor", category: "banking" },
-      { src: "4.jpg", title: "Banking CEE Expo 2025", desc: "Networking Lounge", category: "banking" },
-      { src: "5.jpg", title: "Banking CEE Expo 2025", desc: "Panel Discussion", category: "banking" },
-      { src: "6.jpg", title: "Banking CEE Expo 2025", desc: "VIP Reception", category: "banking" },
-      { src: "7.jpg", title: "Banking CEE Expo 2025", desc: "Sponsor Booths", category: "banking" },
-      { src: "8.jpg", title: "Banking CEE Expo 2025", desc: "Interactive Sessions", category: "banking" },
-      { src: "9.jpg", title: "Banking CEE Expo 2025", desc: "Award Ceremony", category: "banking" },
-      { src: "10.jpg", title: "Banking CEE Expo 2025", desc: "Closing Gala Dinner", category: "banking" },
+      // Digital Banking CEE Summit 2026
+      { src: "photos/dsum2026.jpg", title: "Digital Banking CEE Summit 2026", desc: "Panel Discussion", category: "digital" },
+      { src: "photos/dsum20261.jpg", title: "Digital Banking CEE Summit 2026", desc: "Panel Discussion", category: "digital" },
+      { src: "photos/dsum20262.jpg", title: "Digital Banking CEE Summit 2026", desc: "Main Stage Session", category: "digital" },
+      { src: "photos/dsum20263.jpg", title: "Digital Banking CEE Summit 2026", desc: "VIP Receptions", category: "digital" },
+      { src: "photos/dsum20264.jpg", title: "Digital Banking CEE Summit 2026", desc: "Networking Break", category: "digital" },
+      { src: "photos/dsum20265.jpg", title: "Digital Banking CEE Summit 2026", desc: "Outstanding Speaker", category: "digital" },
+      { src: "photos/dsum20266.jpg", title: "Digital Banking CEE Summit 2026", desc: "AI in Banking Presentation", category: "digital" },
+      { src: "photos/dsum20267.jpg", title: "Digital Banking CEE Summit 2026", desc: "Interactive Workshop", category: "digital" },
+      { src: "photos/dsum20268.jpg", title: "Digital Banking CEE Summit 2026", desc: "Informal network", category: "digital" },
+      { src: "photos/dsum20269.jpg", title: "Digital Banking CEE Summit 2026", desc: "VIP Receptions", category: "digital" },
 
-      // Digital Banking CEE Summit
-      { src: "BankingCEESum1.jpg", title: "Digital Banking CEE Summit 2025", desc: "Opening Keynote", category: "digital" },
-      { src: "BankingCEESum2.jpg", title: "Digital Banking CEE Summit 2025", desc: "Fintech Innovation Showcase", category: "digital" },
-      { src: "BankingCEESum3.jpg", title: "Digital Banking CEE Summit 2025", desc: "Main Stage Session", category: "digital" },
-      { src: "BankingCEESum4.jpg", title: "Digital Banking CEE Summit 2025", desc: "Panel Discussion", category: "digital" },
-      { src: "BankingCEESum5.jpg", title: "Digital Banking CEE Summit 2025", desc: "Networking Break", category: "digital" },
-      { src: "BankingCEESum6.jpg", title: "Digital Banking CEE Summit 2025", desc: "Exhibition Area", category: "digital" },
-      { src: "BankingCEESum7.jpg", title: "Digital Banking CEE Summit 2025", desc: "AI in Banking Presentation", category: "digital" },
-      { src: "BankingCEESum8.jpg", title: "Digital Banking CEE Summit 2025", desc: "Interactive Workshop", category: "digital" },
-      { src: "BankingCEESum9.jpg", title: "Digital Banking CEE Summit 2025", desc: "Award Ceremony", category: "digital" },
-      { src: "BankingCEESum10.jpg", title: "Digital Banking CEE Summit 2025", desc: "Closing Gala", category: "digital" },
+      // Digital Banking CEE Summit 2025
+      { src: "photos/BankingCEESum1.jpg", title: "Digital Banking CEE Summit 2025", desc: "Lovely place", category: "digital" },
+      { src: "photos/BankingCEESum2.jpg", title: "Digital Banking CEE Summit 2025", desc: "Fintech Innovation Showcase", category: "digital" },
+      { src: "photos/BankingCEESum3.jpg", title: "Digital Banking CEE Summit 2025", desc: "Main Stage Session", category: "digital" },
+      { src: "photos/BankingCEESum4.jpg", title: "Digital Banking CEE Summit 2025", desc: " Discussion", category: "digital" },
+      { src: "photos/BankingCEESum5.jpg", title: "Digital Banking CEE Summit 2025", desc: "Panel Discussion", category: "digital" },
+      { src: "photos/BankingCEESum6.jpg", title: "Digital Banking CEE Summit 2025", desc: "Discussion Tea break", category: "digital" },
+      { src: "photos/BankingCEESum7.jpg", title: "Digital Banking CEE Summit 2025", desc: "AI in Banking Presentation", category: "digital" },
+      { src: "photos/BankingCEESum8.jpg", title: "Digital Banking CEE Summit 2025", desc: "Interactive Workshop", category: "digital" },
+      { src: "photos/BankingCEESum9.jpg", title: "Digital Banking CEE Summit 2025", desc: "Networking Lounge", category: "digital" },
+      { src: "photos/BankingCEESum10.jpg", title: "Digital Banking CEE Summit 2025", desc: "Closing Gala", category: "digital" },
 
-      // Insurance CEE Expo
-      { src: "insurance1.jpg", title: "Insurance CEE Expo 2025", desc: "Grand Opening Ceremony", category: "insurance" },
-      { src: "insurance2.jpg", title: "Insurance CEE Expo 2025", desc: "Networking Moment", category: "insurance" },
-      { src: "insurance3.jpg", title: "Insurance CEE Expo 2025", desc: "Gala Dinner", category: "insurance" },
-      { src: "insurance4.jpg", title: "Insurance CEE Expo 2025", desc: "Delegate Badges", category: "insurance" },
-      { src: "insurance5.jpg", title: "Insurance CEE Expo 2025", desc: "Professional Networking", category: "insurance" },
-      { src: "insurance6.jpg", title: "Insurance CEE Expo 2025", desc: "Keynote Presentation", category: "insurance" },
-      { src: "insurance7.jpg", title: "Insurance CEE Expo 2025", desc: "Dessert Station", category: "insurance" },
-      { src: "insurance8.jpg", title: "Insurance CEE Expo 2025", desc: "Panel Discussion", category: "insurance" },
-      { src: "insurance9.jpg", title: "Insurance CEE Expo 2025", desc: "Group of Leaders", category: "insurance" },
-      { src: "insurance10.jpg", title: "Insurance CEE Expo 2025", desc: "Informal Networking", category: "insurance" }
+      // Banking CEE Expo 2025
+      { src: "photos/1.jpg", title: "Banking CEE Expo 2025", desc: "Grand Opening Ceremony", category: "banking" },
+      { src: "photos/2.jpg", title: "Banking CEE Expo 2025", desc: "Keynote Session", category: "banking" },
+      { src: "photos/3.jpg", title: "Banking CEE Expo 2025", desc: "Exhibition Floor", category: "banking" },
+      { src: "photos/4.jpg", title: "Banking CEE Expo 2025", desc: "Networking Lounge", category: "banking" },
+      { src: "photos/5.jpg", title: "Banking CEE Expo 2025", desc: "outstanding Speaker", category: "banking" },
+      { src: "photos/6.jpg", title: "Banking CEE Expo 2025", desc: "VIP Reception", category: "banking" },
+      { src: "photos/7.jpg", title: "Banking CEE Expo 2025", desc: "Sponsor Booths", category: "banking" },
+      { src: "photos/8.jpg", title: "Banking CEE Expo 2025", desc: "Interactive Sessions", category: "banking" },
+      { src: "photos/9.jpg", title: "Banking CEE Expo 2025", desc: "Award Ceremony", category: "banking" },
+      { src: "photos/10.jpg", title: "Banking CEE Expo 2025", desc: "Discussion Panel", category: "banking" },
+      
+      // Digital Banking CEE Summit 2024
+      { src: "photos/dsum2024.jpg", title: "Digital Banking CEE Summit 2024", desc: "Discussion panel", category: "digital" },
+      { src: "photos/dsum20241.jpg", title: "Digital Banking CEE Summit 2024", desc: "Innovation Showcase", category: "digital" },
+      { src: "photos/dsum20242.jpg", title: "Digital Banking CEE Summit 2024", desc: "Main Stage Session", category: "digital" },
+      { src: "photos/dsum20243.jpg", title: "Digital Banking CEE Summit 2024", desc: "VIP Reception", category: "digital" },
+      { src: "photos/dsum202410.jpg", title: "Digital Banking CEE Summit 2024", desc: "Networking Booth", category: "digital" },
+      { src: "photos/dsum20245.jpg", title: "Digital Banking CEE Summit 2024", desc: "Exhibition Area", category: "digital" },
+      { src: "photos/dsum20246.jpg", title: "Digital Banking CEE Summit 2024", desc: "AI in Banking Presentation", category: "digital" },
+      { src: "photos/dsum20247.jpg", title: "Digital Banking CEE Summit 2024", desc: "Interaction", category: "digital" },
+      { src: "photos/dsum20248.jpg", title: "Digital Banking CEE Summit 2024", desc: "Award Ceremony", category: "digital" },
+      { src: "photos/dsum20249.jpg", title: "Digital Banking CEE Summit 2024", desc: "Informal networking", category: "digital" },
+
+      // Insurance CEE Expo 2024
+      { src: "photos/insurance1.jpg", title: "Insurance CEE Expo 2024", desc: "Grand Opening Ceremony", category: "insurance" },
+      { src: "photos/insurance2.jpg", title: "Insurance CEE Expo 2024", desc: "Networking Moment", category: "insurance" },
+      { src: "photos/insurance3.jpg", title: "Insurance CEE Expo 2024", desc: "Gala Dinner", category: "insurance" },
+      { src: "photos/insurance4.jpg", title: "Insurance CEE Expo 2024", desc: "Delegate Badges", category: "insurance" },
+      { src: "photos/insurance5.jpg", title: "Insurance CEE Expo 2024", desc: "Professional Networking", category: "insurance" },
+      { src: "photos/insurance6.jpg", title: "Insurance CEE Expo 2024", desc: "Keynote Presentation", category: "insurance" },
+      { src: "photos/insurance7.jpg", title: "Insurance CEE Expo 2024", desc: "Dessert Station", category: "insurance" },
+      { src: "photos/insurance8.jpg", title: "Insurance CEE Expo 2024", desc: "Panel Discussion", category: "insurance" },
+      { src: "photos/insurance9.jpg", title: "Insurance CEE Expo 2024", desc: "Group of Leaders", category: "insurance" },
+      { src: "photos/insurance10.jpg", title: "Insurance CEE Expo 2024", desc: "Informal Networking", category: "insurance" },
+       
+      // Banking CEE Expo 2024
+      { src: "photos/bceeexpo1.jpg", title: "Banking CEE Expo 2024", desc: "Networking Moment", category: "banking" },
+      { src: "photos/bceeexpo2.jpg", title: "Banking CEE Expo 2024", desc: "Opening Keynote", category: "banking" },
+      { src: "photos/bceeexpo3.jpg", title: "Banking CEE Expo 2024", desc: "Workshop presentation", category: "banking" },
+      { src: "photos/bceeexpo4.jpg", title: "Banking CEE Expo 2024", desc: "Main Stage Session", category: "banking" },
+      { src: "photos/bceeexpo5.jpg", title: "Banking CEE Expo 2024", desc: "VIP Reception", category: "banking" },
+      { src: "photos/bceeexpo6.jpg", title: "Banking CEE Expo 2024", desc: "VIP Reception", category: "banking" },
+      { src: "photos/bceeexpo7.jpg", title: "Banking CEE Expo 2024", desc: "Gala Diner", category: "banking" },
+      { src: "photos/bceeexpo8.jpg", title: "Banking CEE Expo 2024", desc: "Informal discussion", category: "banking" },
+      { src: "photos/bceeexpo9.jpg", title: "Banking CEE Expo 2024", desc: "sponsor booth", category: "banking" },
+      { src: "photos/bceeexpo10.jpg", title: "Banking CEE Expo 2024", desc: "Networking", category: "banking" },
+
+      // Insurance CEE Expo 2023
+      { src: "photos/insurance2023.jpg", title: "Insurance CEE Expo 2023", desc: "Grand Welcoming", category: "insurance" },
+      { src: "photos/insurance20231.jpg", title: "Insurance CEE Expo 2023", desc: "Networking Moment", category: "insurance" },
+      { src: "photos/insurance20232.jpg", title: "Insurance CEE Expo 2023", desc: "Professional Workshop", category: "insurance" },
+      { src: "photos/insurance20233.jpg", title: "Insurance CEE Expo 2023", desc: "Professional Panel Discussion", category: "insurance" },
+      { src: "photos/insurance20234.jpg", title: "Insurance CEE Expo 2023", desc: "Professional Networking", category: "insurance" },
+      { src: "photos/insurance20235.jpg", title: "Insurance CEE Expo 2023", desc: "Keynote Presentation", category: "insurance" },
+      { src: "photos/insurance20236.jpg", title: "Insurance CEE Expo 2023", desc: "sponsor Booth", category: "insurance" },
+      { src: "photos/insurance20237.jpg", title: "Insurance CEE Expo 2023", desc: "Connectiva Members", category: "insurance" },
+      { src: "photos/insurance20238.jpg", title: "Insurance CEE Expo 2023", desc: "Group of Leaders", category: "insurance" },
+      { src: "photos/insurance20239.jpg", title: "Insurance CEE Expo 2023", desc: "Share Knowledge", category: "insurance" },
+    
+      // Banking CEE Expo 2023
+      { src: "photos/bceeexpo2023.jpg", title: "Banking CEE Expo 2023", desc: "Group of Leader", category: "banking" },
+      { src: "photos/bceeexpo20231.jpg", title: "Banking CEE Expo 2023", desc: "Discussion Panel", category: "banking" },
+      { src: "photos/bceeexpo20232.jpg", title: "Banking CEE Expo 2023", desc: "Outstanding Speaker", category: "banking" },
+      { src: "photos/bceeexpo20233.jpg", title: "Banking CEE Expo 2023", desc: "Workshop Session", category: "banking" },
+      { src: "photos/bceeexpo20234.jpg", title: "Banking CEE Expo 2023", desc: "Shared Knowledge", category: "banking" },
+      { src: "photos/bceeexpo20235.jpg", title: "Banking CEE Expo 2023", desc: "Main Stage Session", category: "banking" },
+      { src: "photos/bceeexpo20236.jpg", title: "Banking CEE Expo 2023", desc: "Exhibition Area", category: "banking" },
+      { src: "photos/bceeexpo20237.jpg", title: "Banking CEE Expo 2023", desc: "Premium Welcoming", category: "banking" },
+      { src: "photos/bceeexpo20238.jpg", title: "Banking CEE Expo 2023", desc: "Professional Network", category: "banking" },
+      { src: "photos/bceeexpo20239.jpg", title: "Banking CEE Expo 2023", desc: "Professional Interaction", category: "banking" },
+   
+
+      // Banking CEE Expo 2022
+      { src: "photos/bceeexpo20229.jpg", title: "Banking CEE Expo 2022", desc: "Opening Ceremony", category: "banking" },
+      { src: "photos/bceeexpo2022.jpg", title: "Banking CEE Expo 2022", desc: "Discussion Panel", category: "banking" },
+      { src: "photos/bceeexpo20221.jpg", title: "Banking CEE Expo 2022", desc: "Sponsor Booth", category: "banking" },
+      { src: "photos/bceeexpo20222.jpg", title: "Banking CEE Expo 2022", desc: "Groupe Leader", category: "banking" },
+      { src: "photos/bceeexpo20223.jpg", title: "Banking CEE Expo 2022", desc: "Main Stage Session", category: "banking" },
+      { src: "photos/bceeexpo20224.jpg", title: "Banking CEE Expo 2022", desc: "Panel Discussion", category: "banking" },
+      { src: "photos/bceeexpo20225.jpg", title: "Banking CEE Expo 2022", desc: "Workshop Session", category: "banking" },
+      { src: "photos/bceeexpo20226.jpg", title: "Banking CEE Expo 2022", desc: "Professional Interaction", category: "banking" },
+      { src: "photos/bceeexpo20227.jpg", title: "Banking CEE Expo 2022", desc: "Group of Leader", category: "banking" },
+      { src: "photos/bceeexpo20228.jpg", title: "Banking CEE Expo 2022", desc: "Gold Speaker", category: "banking" },
+      
     ];
 
     let currentIndex = 0;
+    let currentPhotos = allPhotos;
 
-    function createGallery(filteredPhotos) {
+    function createGallery(photos) {
+      currentPhotos = photos;
       const grid = document.getElementById('gallery-grid');
       grid.innerHTML = '';
 
-      filteredPhotos.forEach((photo, index) => {
+      let currentEvent = '';
+      
+      photos.forEach((photo, index) => {
+        // Add event title when the event changes
+        if (photo.title !== currentEvent) {
+          currentEvent = photo.title;
+          
+         const titleDiv = document.createElement('div');
+            titleDiv.className = 'category-title';
+            titleDiv.innerHTML = `<h3 class="text-3xl font-bold text-[#0A2540] border-b border-gray-200 pb-4">${photo.title}</h3>`;
+            grid.appendChild(titleDiv);
+        }
+
         const div = document.createElement('div');
         div.className = `gallery-card group relative rounded-3xl overflow-hidden shadow-md cursor-pointer aspect-[4/3]`;
         div.innerHTML = `
@@ -169,21 +260,25 @@
     }
 
     function filterCategory(cat) {
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        const isActive = (cat === 'all' && btn.textContent === 'All') || 
-                        btn.textContent.toLowerCase().includes(cat);
-        btn.classList.toggle('active', isActive);
-        btn.classList.toggle('bg-[#0A2540]', isActive);
-        btn.classList.toggle('text-white', isActive);
-      });
+     document.querySelectorAll('.filter-btn').forEach(btn => {
+         const isActive = (cat === 'all' && btn.textContent === 'All') ||
+                    btn.textContent.toLowerCase().includes(cat);
 
-      const filtered = cat === 'all' ? allPhotos : allPhotos.filter(p => p.category === cat);
-      createGallery(filtered);
-    }
+           btn.classList.toggle('active', isActive);
+           btn.classList.toggle('bg-[#0A2540]', isActive);
+           btn.classList.toggle('text-white', isActive);
+    });
+
+       currentPhotos = (cat === 'all') 
+      ? allPhotos 
+      : allPhotos.filter(p => p.category === cat);
+
+       createGallery(currentPhotos);
+}
 
     function openLightbox(index) {
       currentIndex = index;
-      const photo = allPhotos[index];
+      const photo = currentPhotos[index];
       document.getElementById('lightbox-image').src = photo.src;
       document.getElementById('lightbox-title').textContent = photo.title;
       document.getElementById('lightbox-desc').textContent = photo.desc;
@@ -200,23 +295,21 @@
       document.body.style.overflow = 'visible';
     }
 
-    function prevImage() {
-      currentIndex = (currentIndex - 1 + allPhotos.length) % allPhotos.length;
-      openLightbox(currentIndex);
-    }
-
-    function nextImage() {
-      currentIndex = (currentIndex + 1) % allPhotos.length;
-      openLightbox(currentIndex);
-    }
-
-    // Keyboard support
     document.addEventListener('keydown', e => {
       if (document.getElementById('lightbox').classList.contains('hidden')) return;
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft') prevImage();
       if (e.key === 'ArrowRight') nextImage();
     });
+
+   function prevImage() {
+      currentIndex = (currentIndex - 1 + currentPhotos.length) % currentPhotos.length;
+      openLightbox(currentIndex);
+    }
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % currentPhotos.length;
+      openLightbox(currentIndex);
+    }
 
     document.getElementById('lightbox').addEventListener('click', (e) => {
       if (e.target.id === 'lightbox') closeLightbox();
